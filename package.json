@@ -24,6 +24,8 @@
   "devDependencies": {
     "chai": "^5.1.1",
     "chai-http": "^5.0.0",
-    "mocha": "^10.7.3"
+    "mocha": "^10.7.3",
+    "pdfkit": "^0.15.0",
+    "spotify-web-api-node": "^5.0.2"
   }
 }

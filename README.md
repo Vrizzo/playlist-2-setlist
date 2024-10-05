@@ -1,7 +1,7 @@
 # Playlist-2-Setlist
 
 **Playlist-2-Setlist** is a tool that converts a Spotify playlist into a PDF setlist, which can be printed and brought on stage. This is particularly useful for musicians and bands who want to have a physical copy of their setlist during performances.
-![Home](./public/home.jpeg)
+![Home](./public/home2.jpeg)
 ## Features
 
 - **Spotify Integration**: Fetches playlist data directly from Spotify.
