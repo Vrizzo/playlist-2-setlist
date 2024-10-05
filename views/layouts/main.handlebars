@@ -17,9 +17,19 @@
         <a class="menu-item" href="/">Home</a>
         <a class="menu-item" href="/profile">Profile</a>
         <a class="menu-item" href="/my-playlist">My Playlist</a>
+        <a class="menu-item" href="/#" onclick="handleLogout()">Logout</a>
     </div>
 </div>
 <script src="/menu.js"></script>
+<script>
+    function handleLogout() {
+        fetch('/logout')
+                .then(() => {
+                    window.location.href = '/';
+                });
+    }
+</script>
+
 
 {{{body}}}
 </body>

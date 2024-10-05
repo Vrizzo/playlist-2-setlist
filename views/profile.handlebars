@@ -1,8 +1,10 @@
-<h1>User Profile</h1>
-<div>
-    <p> <a href="{{userProfile.profileUrl}}">{{userProfile.displayName}}</a></p>
-
-    <img src="{{userProfile.photos.[1]}}" alt="profile picture">
-
-    <!-- Add more fields as needed -->
+<div class="container">
+    <h1>Profile</h1>
+    {{#if userProfile}}
+        <p>Name: {{userProfile.displayName}}</p>
+        <p>Email: {{userProfile.emails.[0].value}}</p>
+        <img src="{{userProfile.photos.[1]}}" alt="Profile Picture" width="100">
+    {{else}}
+        <p>Profile not found.</p>
+    {{/if}}
 </div>
