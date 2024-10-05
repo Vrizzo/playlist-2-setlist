@@ -1,12 +1,15 @@
-<h1>My Playlists</h1>
-<ul>
-    {{#each playlists}}
-        <li>
-            <h2>{{this.name}}</h2>
-            <p>{{this.description}}</p>
-            <img src="{{this.images.[0].url}}" alt="{{this.name}}" width="200">
-            <a href="/export-pdf/{{this.id}}">Export PDF</a>
-
-        </li>
-    {{/each}}
-</ul>
+<div class="container">
+    <h1>My Playlists</h1>
+    <ul>
+        {{#each playlists}}
+            <li>
+                <img src="{{this.images.[0].url}}" alt="{{this.name}}" width="100">
+                <div>
+                    <h2>{{this.name}}</h2>
+                    <p>{{this.description}}</p>
+                </div>
+                <a href="/export-pdf/{{this.id}}">Export PDF</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
