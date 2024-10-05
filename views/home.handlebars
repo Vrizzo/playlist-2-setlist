@@ -1,0 +1,27 @@
+<h1>Welcome to {{title}}</h1>
+<p>is a tool that converts a Spotify playlist into a PDF setlist, which can be printed and brought on stage. This is particularly useful for musicians and bands who want to have a physical copy of their setlist during performances.</p>
+<div class="App">
+    {{#if profileInfo}}
+        <div>
+            <h1>Welcome, {{profileInfo.displayName}}</h1>
+            <button onclick="handleLogout()">Logout</button>
+        </div>
+    {{else}}
+        <div>
+            <h1>Login with Spotify</h1>
+            <button onclick="handleLogin()">Login</button>
+        </div>
+    {{/if}}
+</div>
+<script>
+    function handleLogin() {
+        window.location.href = '/auth/spotify';
+    }
+
+    function handleLogout() {
+        fetch('/logout')
+                .then(() => {
+                    window.location.href = '/';
+                });
+    }
+</script>
