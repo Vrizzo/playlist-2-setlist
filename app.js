@@ -4,22 +4,28 @@ const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
-const SpotifyWebApi = require('spotify-web-api-node');
 const SpotifyStrategy = require('passport-spotify').Strategy;
+const playlistRoutes = require('./routes/playlist');
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
 
-const app = express();
-app.use(cors());
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
+function expressInit() {
+    const app = express();
+    app.use(cors());
+    app.engine('handlebars', exphbs());
+    app.set('view engine', 'handlebars');
+    app.set('views', path.join(__dirname, 'views'));
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(session({secret: 'your_secret_key', resave: false, saveUninitialized: true}));
 
-app.use(session({ secret: 'your_secret_key', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use('/', playlistRoutes);
+    return app;
+}
+
+const app = expressInit();
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -81,65 +87,6 @@ app.get('/profile/json', (req, res) => {
 });
 
 
-// Initialize the Spotify API client
-const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI
-});
-
-app.get('/my-playlist', (req, res) => {
-    if (!req.isAuthenticated()) {
-        return res.redirect('/auth/spotify');
-    }
-
-    const accessToken = req.user.accessToken;
-    console.info('accessToken:', accessToken);
-    spotifyApi.setAccessToken(accessToken);
-
-    spotifyApi.getUserPlaylists()
-        .then(data => {
-            const playlists = data.body.items;
-            res.render('my-playlist', { playlists: playlists });
-        })
-        .catch(err => {
-            console.error('Error fetching playlists:', err);
-            res.status(500).send('Error fetching playlists');
-        });
-});
-const PDFDocument = require('pdfkit');
-
-app.get('/export-pdf/:playlistId', (req, res) => {
-    if (!req.isAuthenticated()) {
-        return res.redirect('/auth/spotify');
-    }
-
-    const accessToken = req.user.accessToken;
-    spotifyApi.setAccessToken(accessToken);
-
-    spotifyApi.getPlaylist(req.params.playlistId)
-        .then(data => {
-            const playlist = data.body;
-            const doc = new PDFDocument();
-            let filename = encodeURIComponent(playlist.name) + '.pdf';
-            res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
-            res.setHeader('Content-type', 'application/pdf');
-            doc.pipe(res);
-
-            doc.fontSize(25).text(playlist.name, { align: 'center' });
-            doc.moveDown();
-
-            playlist.tracks.items.forEach((item, index) => {
-                doc.fontSize(12).text(`${index + 1}. ${item.track.name}`);
-            });
-
-            doc.end();
-        })
-        .catch(err => {
-            console.error('Error fetching playlist:', err);
-            res.status(500).send('Error fetching playlist');
-        });
-});
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
