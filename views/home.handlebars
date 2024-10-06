@@ -5,6 +5,7 @@
     <h1>Welcome to Playlist 2 Set List</h1>
     {{#if profileInfo}}
         <p>Hello, {{profileInfo.displayName}}</p>
+        <p><a class="menu-item" href="/my-playlist">Show your playlist >></a></p>
     {{else}}
         <p>Please <a href="/auth/spotify">log in with Spotify</a> to continue.</p>
     {{/if}}

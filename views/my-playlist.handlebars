@@ -2,6 +2,7 @@
     <h1>My Playlists</h1>
     <ul>
         {{#each playlists}}
+            {{#if this.name.length}}
             <li>
                 <img src="{{this.images.[0].url}}" alt="{{this.name}}" width="100">
                 <div>
@@ -10,6 +11,7 @@
                 </div>
                 <a href="/export-pdf/{{this.id}}">Export PDF</a>
             </li>
+            {{/if}}
         {{/each}}
     </ul>
 </div>

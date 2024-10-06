@@ -50,7 +50,7 @@ router.get('/export-pdf/:playlistId', (req, res) => {
             doc.moveDown();
 
             playlist.tracks.items.forEach((item, index) => {
-                doc.fontSize(17).text(`${index + 1}. ${item.track.name}`);
+                doc.fontSize(19).text(`${index + 1}. ${item.track.name}`);
             });
 
             doc.end();

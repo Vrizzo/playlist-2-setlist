@@ -1,8 +1,17 @@
+/* public/styles.css */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+  background-color: #1e1e1e;
+  color: #c5c6c7;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+  color: #66fcf1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #45a29e;
 }
 
 .container {
@@ -10,7 +19,6 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
 h1 {
   text-align: center;
   color: #333;
@@ -22,7 +30,7 @@ ul {
 }
 
 li {
-  background-color: #fff;
+  background-color: #0b0c10;;
   margin: 10px 0;
   padding: 20px;
   border-radius: 8px;
@@ -38,7 +46,6 @@ li img {
 
 li h2 {
   margin: 0;
-  color: #007BFF;
 }
 
 li p {
@@ -49,17 +56,19 @@ li p {
 li a {
   margin-left: auto;
   text-decoration: none;
-  color: #007BFF;
-  border: 1px solid #007BFF;
+  color: #45a29e;
+  border: 1px solid #45a29e;
   padding: 5px 10px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 li a:hover {
-  background-color: #007BFF;
-  color: #fff;
+  background-color: #45a29e;
+  color: #0b0c10;
 }
+
+
 .hero-banner {
   display: flex;
   justify-content: center;
@@ -73,11 +82,6 @@ li a:hover {
   z-index: -1;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-/* styles.css */
 .hamburger-menu {
   position: absolute;
   top: 0;
@@ -98,7 +102,7 @@ code {
 .menu-icon div {
   width: 100%;
   height: 4px;
-  background-color: #333;
+  background-color: #c5c6c7;
   transition: all 0.3s ease;
 }
 
@@ -108,7 +112,7 @@ code {
   position: absolute;
   top: 35px;
   right: 0;
-  background-color: #fff;
+  background-color: #0b0c10;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 5px;
@@ -121,11 +125,22 @@ code {
 .menu-item {
   white-space: nowrap;
   text-decoration: none;
-  color: #333;
+  color: #c5c6c7;
   padding: 10px 0;
   transition: color 0.3s ease;
 }
 
 .menu-item:hover {
-  color: #007BFF;
+  color: #66fcf1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #66fcf1;
+}
+
+code {
+  background-color: #0b0c10;
+  color: #66fcf1;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
