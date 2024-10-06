@@ -22,13 +22,13 @@
     "express-session": "^1.18.0",
     "passport": "^0.7.0",
     "passport-spotify": "^0.3.1",
-    "start": "^5.1.0"
+    "start": "^5.1.0",
+    "pdfkit": "^0.15.0",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "chai": "^5.1.1",
     "chai-http": "^5.0.0",
-    "mocha": "^10.7.3",
-    "pdfkit": "^0.15.0",
-    "spotify-web-api-node": "^5.0.2"
+    "mocha": "^10.7.3"
   }
 }
