@@ -5,7 +5,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
-const playlistRoutes = require('./routes/playlist');
+const playlistRoutes = require('./src/routes/playlist');
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();

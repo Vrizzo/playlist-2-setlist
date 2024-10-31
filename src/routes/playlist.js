@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const SpotifyWebApi = require('spotify-web-api-node');
 const PDFDocument = require('pdfkit');
+const SpotifyPlaylistRepository = require('../adapters/SpotifyPlaylistRepository');
+const GetAllPlaylists = require('../usecases/GetAllPlaylists');
+
 
 // Initialize the Spotify API client
 const spotifyApi = new SpotifyWebApi({
@@ -9,16 +12,18 @@ const spotifyApi = new SpotifyWebApi({
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     redirectUri: process.env.SPOTIFY_REDIRECT_URI
 });
+function createUseCase(req) {
+    const accessToken = req.user.accessToken;
+    spotifyApi.setAccessToken(accessToken);
+    const playlistRepository = new SpotifyPlaylistRepository(spotifyApi);
+    return new GetAllPlaylists(playlistRepository);
+}
 
 router.get('/my-playlist', (req, res) => {
     if (!req.isAuthenticated()) {
         return res.redirect('/auth/spotify');
     }
-
-    const accessToken = req.user.accessToken;
-    spotifyApi.setAccessToken(accessToken);
-
-    spotifyApi.getUserPlaylists()
+    createUseCase(req).execute()
         .then(data => {
             const playlists = data.body.items;
             res.render('my-playlist', { playlists: playlists });
