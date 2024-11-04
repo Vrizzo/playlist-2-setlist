@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const playlistRoutes = require('./routes/playlist');
+const friendlistRoutes = require('./routes/friendlist');
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
@@ -22,6 +23,7 @@ function expressInit() {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use('/', playlistRoutes);
+    app.use('/', friendlistRoutes);
     return app;
 }
 
@@ -48,7 +50,7 @@ passport.use(new SpotifyStrategy({
 
 app.get('/auth/spotify',
     passport.authenticate('spotify', {
-        scope: ['user-read-email', 'user-read-private'],
+        scope: ['user-read-email', 'user-read-private', 'user-follow-read'],
         showDialog: true
     })
 );

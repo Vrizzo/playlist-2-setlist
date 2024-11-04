@@ -1,0 +1,12 @@
+<!-- views/my-friends.handlebars -->
+<div class="container">
+    <h1>My Friends</h1>
+    <ul>
+        {{#each friends}}
+            <li>
+                <img src="{{this.images.[0].url}}" alt="{{this.name}}" width="50" height="50">
+                <span>{{this.name}}</span>
+            </li>
+        {{/each}}
+    </ul>
+</div>

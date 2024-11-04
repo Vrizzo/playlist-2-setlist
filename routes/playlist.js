@@ -18,7 +18,7 @@ router.get('/my-playlist', (req, res) => {
     const accessToken = req.user.accessToken;
     spotifyApi.setAccessToken(accessToken);
 
-    spotifyApi.getUserPlaylists()
+    spotifyApi.getUserPlaylists('dalamar5',{ limit: 30})
         .then(data => {
             const playlists = data.body.items;
             res.render('my-playlist', { playlists: playlists });
