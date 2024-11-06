@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const playlistRoutes = require('./routes/playlist');
-const friendlistRoutes = require('./routes/friendlist');
+const followedArtistsRoutes = require('./routes/followed-artists');
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
@@ -23,7 +23,7 @@ function expressInit() {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use('/', playlistRoutes);
-    app.use('/', friendlistRoutes);
+    app.use('/', followedArtistsRoutes);
     return app;
 }
 

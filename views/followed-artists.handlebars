@@ -1,8 +1,8 @@
-<!-- views/my-friends.handlebars -->
+<!-- views/followed-artists.handlebars -->
 <div class="container">
-    <h1>My Friends</h1>
+    <h1>Followed Artist</h1>
     <ul>
-        {{#each friends}}
+        {{#each artists}}
             <li>
                 <img src="{{this.images.[0].url}}" alt="{{this.name}}" width="50" height="50">
                 <span>{{this.name}}</span>
