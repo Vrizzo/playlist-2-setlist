@@ -17,15 +17,16 @@ router.get('/my-playlist', (req, res) => {
 
     const accessToken = req.user.accessToken;
     spotifyApi.setAccessToken(accessToken);
+    const userId = req.query.userId || ''; // Default to 'dalamar5' if no userId is provided
 
-    spotifyApi.getUserPlaylists('dalamar5',{ limit: 30})
+    spotifyApi.getUserPlaylists(userId,{ limit: 30})
         .then(data => {
             const playlists = data.body.items;
-            res.render('my-playlist', { playlists: playlists });
+            res.render('my-playlist', { playlists: playlists, userId: userId });
         })
         .catch(err => {
             console.error('Error fetching playlists:', err);
-            res.status(500).send('Error fetching playlists');
+            res.render('my-playlist', { userId: userId });
         });
 });
 
@@ -52,7 +53,6 @@ router.get('/export-pdf/:playlistId', (req, res) => {
             playlist.tracks.items.forEach((item, index) => {
                 doc.fontSize(19).text(`${index + 1}. ${item.track.name}`);
             });
-
             doc.end();
         })
         .catch(err => {
